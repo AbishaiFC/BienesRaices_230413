@@ -1,0 +1,37 @@
+{
+  "name": "mx.edu.utxj.ti.awos.bienes-raices",
+  "version": "1.0.0",
+  "description": "Proyecto de Clase para la Unidad 2, de la Asignatura AWOS utilizando Node.js",
+  "main": "index.js",
+  "scripts": {
+    "saluda": "node saluda.js",
+    "server": "nodemon index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbishaiFC/BienesRaices_230413.git"
+  },
+  "keywords": [
+    "MVC",
+    "Express",
+    "Sequelize",
+    "MySQL",
+    "Tailwind",
+    "Nodemon",
+    "NodeJS",
+    "Mailtrap",
+    "JWT"
+  ],
+  "author": "Osvaldo Abishai Flores Campos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbishaiFC/BienesRaices_230413/issues"
+  },
+  "homepage": "https://github.com/AbishaiFC/BienesRaices_230413#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

@@ -9,7 +9,7 @@ Para poder demostrar y aprender la creación y consyumo de Interfaces de Profgra
 
 |No. | Fecha | Descripción | Potenciador | Estatus |
 |--|--|--|--|--|
-|8.|17/09/2024|  Nuevo Repositorio del Proyecto implementando .gitignore|1|⭐ Activa|
+| 8. | 17/09/2024 |  Nuevo Repositorio del Proyecto implementando .gitignore | 1 | ⭐ Activa |
 
 ## Autor
 
