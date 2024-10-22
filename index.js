@@ -1,4 +1,7 @@
-const express = require('express'); // Importar la libreria para crewar un servidor Web
+// Importar la libreria para crewar un servidor Web
+// const express = require('express');  Common JS
+
+import express from 'express'; // EcmaScript6
 
 // Instanciar nuestra aplicación Web
 const app = express();
