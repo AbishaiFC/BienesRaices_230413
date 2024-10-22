@@ -2,6 +2,8 @@
 // const express = require('express');  Common JS
 
 import express from 'express'; // EcmaScript6
+import generalRoutes from './routes/generalRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
 // Instanciar nuestra aplicación Web
 const app = express();
@@ -22,3 +24,9 @@ app.get("/QuienSoy", function(req, res){
         "grupo": "B", 
         "asignatura": "Aplicaciones Web Orientada a Servicios(AWOS)"});
 })
+
+// Routing - Enrutamiento
+
+app.use('/', generalRoutes);
+app.use('/usuario/', userRoutes);
+// Probamos las rutas para poder presentae mensajes al usuario a traves del navegador 
