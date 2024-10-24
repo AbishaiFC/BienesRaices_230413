@@ -28,5 +28,5 @@ app.get("/QuienSoy", function(req, res){
 // Routing - Enrutamiento
 
 app.use('/', generalRoutes);
-app.use('/usuario/', userRoutes);
+app.use('/usuario', userRoutes);
 // Probamos las rutas para poder presentae mensajes al usuario a traves del navegador 
