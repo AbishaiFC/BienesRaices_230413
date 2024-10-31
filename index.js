@@ -28,5 +28,9 @@ app.get("/QuienSoy", function(req, res){
 // Routing - Enrutamiento
 
 app.use('/', generalRoutes);
-app.use('/usuario', userRoutes);
+app.use('/auth', userRoutes);
 // Probamos las rutas para poder presentae mensajes al usuario a traves del navegador 
+
+// Habilitar Pug
+app.set('view engine', 'pug')
+app.set('views', './views')
