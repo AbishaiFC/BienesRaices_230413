@@ -10,8 +10,8 @@ Para poder demostrar y aprender la creación y consyumo de Interfaces de Profgra
 |No. | Fecha | Descripción | Potenciador | Estatus |
 |--|--|--|--|--|
 |8.|17/09/2024|  Nuevo Repositorio del Proyecto implementando .gitignore|1|✅ Finalizada|
-|9.|22/10/2024|Creacion de una Aplicacion Web usando Express|11|⭐ Activa|
-|10.|23/10/2024|Operaciones básicas de una API a traves de los verbos HTTP | Pendiente| ⭐ Activa|
+|9.|22/10/2024|Creacion de una Aplicacion Web usando Express|12|✅ Finalizada|
+|10.|23/10/2024|Operaciones básicas de una API a traves de los verbos HTTP |12|✅ Finalizada|
 
 
 
