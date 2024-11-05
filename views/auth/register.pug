@@ -6,5 +6,27 @@ block contenido
             span.font-normal.text-black Raices 
         h2.text-center.font-extrabold.text-2xl= page
 
-        .mt-8   
+        .mt-8.mx-auto.max-w-md  
             .bg-white.py-8.px-4.shadow
+                form.space-y-5
+                    div
+                        label.block.text.sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Nombre Completo:
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md(type="text" values="nombre" placeholder="Ingresa tu nombre completo" name="nombre")
+                    
+                    div
+                        label.block.text.sm.uppercase.text-gray-500.mb-2.font-bold(for="correo") Correo Electronico:
+                        input#correo.w-full.px-3.py-2.border.border-gray-300.rounded-md(type="email" values="correo" placeholder="Ingresa tu correo" name="correo")
+
+                    div
+                        label.block.text.sm.uppercase.text-gray-500.mb-2.font-bold(for="contrasenia") Contraseña:
+                        input#contrasenia.w-full.px-3.py-2.border.border-gray-300.rounded-md(type="password" values="contrasenia" placeholder="Ingresa tu contraseña" name="contrasenia")
+
+                    div
+                        label.block.text.sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Verificar Contraseña:
+                        input#vContrasenia.w-full.px-3.py-2.border.border-gray-300.rounded-md(type="password" values="vContrasenia" placeholder="Ingresa tu contraseña nuevamente" name="vContrasenia")
+
+                    .flex.items-center.justify-between 
+                        a.text-gray-500.text-xs(class="hover:text-indigo-600 hover:underline hover:decoration-indigo-300" href="/auth/login") ¿Ya tienes cuenta? Ingresa a la plataforma
+                        a.text-gray-500.text-xs(class="hover:text-indigo-600 hover:underline hover:decoration-indigo-300" href="/auth/passswordRecovery/") Olvide mi contraseña
+
+                    input(class="w-full bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white font-bold py-2 cursor-pointer" type="submit" value="Crear cuenta")
