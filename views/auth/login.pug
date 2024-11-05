@@ -1,8 +1,11 @@
-H1 Login
+extends ../layout/index
 
-div 
-    if autenticado 
-        p Bienvenid@ al Sistema de Bienes Raices. 
-    else 
-        p Por favor ingresa tus datos para iniciar sesion.
-    
+
+block contenido
+    div 
+        h2.text-center.font-extrabold.text-6xl Login
+        if autenticado 
+            p Bienvenid@ al Sistema de Bienes Raices. 
+        else 
+            p Por favor ingresa tus datos para iniciar sesion.
+        
