@@ -1,10 +1,14 @@
 import express, { request } from 'express';
+import {formularioLogin,formularioRegister, formularioPasswordRecovery} from '../controllers/userController.js';
 const router = express.Router();
 
 // GET - Se utiliza para ña ñectura de datos e infotmacion del servidor al cliente
 // EndPoints - Son las rutas para acceder a laas secciones o funciones de nuestra aplicacion Web
 // 2 Componentes de una peticiòn ruta ( donde  voy), FUNCION CALLBACK (QUE hago)
 //":" en una ryta definen de manera posicional los parametros de entrada
+
+
+
 router.get("/busquedaPorID/:id", function(req, res){
     res.send(`Se esta solicitando buscar al Usuario con ID: ${req.params.id}`)
 }) // 2 Componentes de una petecion ruta, funcion Callback
@@ -46,4 +50,7 @@ router.delete("/deleteUser/:email", function(req, res){
     res.send(`Se ha solicitado la eliminacion del usuario asociado al correo: ${req.params.email}`)
 })
 
+router.get('/login', formularioLogin);
+router.get("/createAccount", formularioRegister);
+router.get("/passswordRecovery", formularioPasswordRecovery);
 export default router;
