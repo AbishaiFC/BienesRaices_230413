@@ -4,9 +4,18 @@
 import express from 'express'; // EcmaScript6
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import db from './config/db.js'
 
 // Instanciar nuestra aplicación Web
 const app = express();
+
+// Conexion a la base de datos
+try{
+    await db.authenticate();
+    console.log('Conexion a la Base de datos correcta')
+}catch(error){
+    console.log(error);
+}
 
 // Configuramos uestro  Servidor Wev
 const port = 3000;

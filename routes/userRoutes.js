@@ -1,5 +1,5 @@
 import express, { request } from 'express';
-import {formularioLogin,formularioRegister, formularioPasswordRecovery} from '../controllers/userController.js';
+import {formularioLogin,formularioRegister, formularioPasswordRecovery, registrar} from '../controllers/userController.js';
 const router = express.Router();
 
 // GET - Se utiliza para ña ñectura de datos e infotmacion del servidor al cliente
@@ -53,4 +53,5 @@ router.delete("/deleteUser/:email", function(req, res){
 router.get('/login', formularioLogin);
 router.get("/createAccount", formularioRegister);
 router.get("/passswordRecovery", formularioPasswordRecovery);
+router.get("/registro",registrar)
 export default router;

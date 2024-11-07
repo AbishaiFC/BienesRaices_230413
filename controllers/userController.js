@@ -14,4 +14,8 @@ const formularioPasswordRecovery = (req,res) => {
             page: "Recuperacion de contraseña"
     })};
 
-export {formularioLogin, formularioRegister, formularioPasswordRecovery}
+    const registrar = (req,res) => {
+        console.log('Registrando... ')
+    }
+
+export {formularioLogin, formularioRegister,registrar, formularioPasswordRecovery}
