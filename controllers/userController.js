@@ -7,12 +7,30 @@ import csrf from 'csrf';
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
-        page: "Ingresa a la plataforma"
+        page: "Ingresa a la plataforma",
+        csrfToken : req.csrfToken()
     });
 };
+const authenticate = async (req, res) => {
+ // Validación
+    await check('email').isEmail().withMessage('El Email es obligatorio').run(req);
+    await check('password').notEmpty().withMessage('La contraseña es obligatoria').run(req);
 
+    const result = validationResult(req);
+
+    // Si hay errores, retornarlos al formulario de registro
+    if (!result.isEmpty()) {
+        return res.render('auth/login', {
+            page: "Iniciar sesión....",
+            csrfToken : req.csrfToken(),
+            errores: result.array()
+        });
+    }
+    const { email, password} = req.body
+
+};
 const formularioRegister = (req, res) => {
-console.log(req.csrfToken())
+    console.log(req.csrfToken())
 
     res.render('auth/register', {
         page: "Crea una nueva cuenta....",
@@ -55,13 +73,13 @@ const formularioPasswordRecovery = (req, res) => {
     });
 };
 
-const registrar = async (req, res) => {
+const register = async (req, res) => {
     // Validación
     await check('nombre').notEmpty().withMessage('El nombre no puede estar vacio').run(req);
     await check('email').isEmail().withMessage('Esto no parece un Email').run(req);
     await check('password').isLength({ min: 6 }).withMessage('La contraseña debe de ser al menos 6 caracteres').run(req);
     await check('Repetirpassword').custom((value, { req }) => {
-            if (value !== req.body.password) {
+            if (value !== req.body.password || value == "") {
                 throw new Error('Las contraseñas no son iguales');
             }
             return true;
@@ -69,14 +87,14 @@ const registrar = async (req, res) => {
         .run(req);
 
     // Resultados de la validación
-    const resultado = validationResult(req);
+    const result = validationResult(req);
 
     // Si hay errores, retornarlos al formulario de registro
-    if (!resultado.isEmpty()) {
+    if (!result.isEmpty()) {
         return res.render('auth/register', {
             page: "Crea una nueva cuenta....",
             csrfToken : req.csrfToken(),
-            errores: resultado.array(),
+            errores: result.array(),
             usuario: {
                 nombre: req.body.nombre,
                 email: req.body.email
@@ -89,9 +107,9 @@ const registrar = async (req, res) => {
 
     try {
         // Verificar que el usuario no esté duplicado
-        const existeUsuario = await Usuario.findOne({ where: { email } });
+        const existsUser = await Usuario.findOne({ where: { email } });
 
-        if (existeUsuario) {
+        if (existsUser) {
             return res.render('auth/register', {
                 page: "Crea una nueva cuenta....",
                 errores: [{ msg: 'Usuario ya registrado' }],
@@ -136,4 +154,4 @@ const registrar = async (req, res) => {
     }
 };
 
-export { formularioLogin, formularioRegister, confirm, registrar, formularioPasswordRecovery };
+export { formularioLogin, formularioRegister, authenticate ,confirm, register, formularioPasswordRecovery };
