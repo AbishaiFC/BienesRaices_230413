@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./views/**/*.pug'],
-  theme: {colors: {
+  theme: {
+    colors: {
     'crimson': {
       100: "#ffe9f2",
       200: "#fcc6dc",
