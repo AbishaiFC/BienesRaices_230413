@@ -12,7 +12,7 @@ Para poder demostrar y aprender la creación y consyumo de Interfaces de Profgra
 |8.|17/09/2024|  Nuevo Repositorio del Proyecto implementando .gitignore|1|✅ Finalizada|
 |9.|22/10/2024|Creacion de una Aplicacion Web usando Express|12|✅ Finalizada|
 |10.|23/10/2024|Operaciones básicas de una API a traves de los verbos HTTP |12|✅ Finalizada|
-|11.|05/11/2024|Implementación de las Pantallas de Logeo, Registro y Recuperación de Contraseña|13|⭐ Activa|
+|11.|05/11/2024|Implementación de las Pantallas de Logeo, Registro y Recuperación de Contraseña|13|✅ Finalizada|
 
 
 ## Autor
