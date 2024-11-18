@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import db from '../config/db.js'
 
 const Usuario = db.define('usuarios', {
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },

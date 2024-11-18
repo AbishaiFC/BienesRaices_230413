@@ -1,0 +1,77 @@
+extends ../layout/index
+
+block contenido
+    .py-10
+        h1.text-4xl.my-10.font-extrabold.text-center.text-indigo-200 Bienes
+            span.font-normal.text-black_white-100 Raices
+        h2.text-center.font-extrabold.my-10.text-2xl.text-black_white-100= page
+
+        p.text-xl.font-bold.text-center.my-10.text-black_white-100= message
+        form.space-y-5(method="POST")
+            input(type="hidden" name="_csrf" value= csrfToken)
+
+        if notification
+            script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11")
+            script.
+                Swal.fire({
+                    toast: false,
+                    position: 'center',
+                    title: "¡Registro exitoso!",
+                    text: "Se le ha enviado un mensaje a su correo, por favor revise su bandeja de entrada.",
+                    icon: 'success',
+                    iconColor: '#b8336a',
+                    timer: 7000,
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    customClass: {
+                        popup: 'bg-indigo-900 shadow-white custom-popup',
+                        timerProgressBar: 'glowing-timer',
+                        icon: 'glowing-icon', 
+                    }
+                });
+
+            style.
+                .swal2-popup {
+                    color: #ffffff !important;
+                }
+                .custom-popup {
+                    box-shadow: 0 0 50px 15px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.5);
+                }
+                .glowing-icon {
+                    position: relative;
+                }
+                .glowing-icon::after {
+                    content: '';
+                    position: absolute;
+                    top: -5px;
+                    left: -5px;
+                    right: -5px;
+                    bottom: -5px;
+                    border-radius: 50%;
+                    box-shadow: 0 0 20px #b8336a, 0 0 40px #b8336a, 0 0 60px #b8336a;
+                    animation: pulse 2s infinite;
+                }
+                @keyframes pulse {
+                    0%, 100% {
+                        box-shadow: 0 0 20px #b8336a, 0 0 40px #b8336a, 0 0 60px #b8336a;
+                    }
+                    50% {
+                        box-shadow: 0 0 30px #b8336a, 0 0 50px #b8336a, 0 0 80px #b8336a;
+                    }
+                }
+                @keyframes pulse-bar {
+                    0%, 100% {
+                        box-shadow: 0 0 10px #b8336a, 0 0 20px #b8336a, 0 0 30px #b8336a;
+                    }
+                    50% {
+                        box-shadow: 0 0 15px #b8336a, 0 0 25px #b8336a, 0 0 40px #b8336a;
+                    }
+                }
+                .swal2-timer-progress-bar {
+                    height: 6px !important;
+                    background-color: #b8336a !important;
+                    box-shadow: 0 0 10px #b8336a, 0 0 20px #b8336a, 0 0 30px #b8336a !important;
+                    opacity: 1 !important;
+                    z-index: 1000 !important;
+                }

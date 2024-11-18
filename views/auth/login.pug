@@ -2,25 +2,58 @@ extends ../layout/index
 
 block contenido
     .py-10
-        h1.text-4xl.my-10.font-extrabold.text-center.text-indigo-400 Bienes
-            span.font-normal.text-black_white-900 Raices
-        h2.text-center.font-extrabold.my-10.text-2xl= page 
+        h1.text-4xl.my-10.font-extrabold.text-center.text-indigo-200 Bienes
+            span.font-normal.text-black_white-100.blur-none Raices
+        h2.text-center.font-extrabold.my-10.text-2xl.text-black_white-100.blur-none= page 
 
-        .mt-8.mx-auto.max-w-md
-            .bg-white.py-8.px-4.shadow.rounded-xl
-                form.space-y-5
-                    div
-                        label.block.text-sm.uppercase.text-indigo-700.mb-2.font-bold(for="email") Email:
-                        input#nombre.w-full.px-3.py-4.border.border-black_white-200.rounded-md.placeholder-black_white-400(placeholder= "Ingresa tu e-mail" type="email" name="email")
+        
+        .container.mx-auto.max-w-5xl.flex.rounded-lg.overflow-hidden
+            .relative.flex-1.bg-opacity-20
+                .absolute.inset-0
+                    img.w-full.h-full.object-cover(src="/img/Background_Login.png" alt="Background Image")
+                    .absolute.inset-0.bg-blue-500.opacity-30.backdrop-blur-lg
 
-                    div
-                        label.block.text-sm.uppercase.text-indigo-700.mb-2.font-bold(for="Password") Contraseña:
-                        input#nombre.w-full.px-3.py-4.border.border-black_white-200.rounded-md.placeholder-black_white-400(placeholder= "Ingresa tu contraseña" type="password" name="password")
+            
+            div(class="w-full lg:w-1/2 bg-gray-100 py-10 px-12")
+                .bg-black_white-100.py-8.px-4.shadow.rounded-xl.backdrop-blur-md.bg-opacity-10.py-8.px-4.shadow-xl.rounded-xl.shadow-black_white-100.flex-1
+                    form.space-y-5
+                        input(type="hidden" name="_csrf" value= csrfToken)
 
-                    div.flex.items.center.justify-between
-                        a.text-gray-500.text-xs(class="hover:text-indigo-600 hover:underline hover:decoration-indigo-300" href="/auth/createAccount") ¿No tienes cuenta? 
-                            span.text-gray-500.text-xs.text-indigo-300 Crear cuenta
-                        a.text-gray-500.text-xs( class="hover:text-indigo-600 hover:underline hover:decoration-indigo-300" href="/auth/passswordRecovery") Olvide mi contraseña
+                        div
+                            label.block.text-sm.uppercase.text-indigo-200.mb-2.font-bold(for="email") Email:
+                            .flex.items-center.border.py-2.px-3.rounded-md.mb-4.border-black_white-100
+                                svg(class="h-5 w-5 text-black_white-100 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor")
+                                    path(stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207")
+                                input#nombre.w-full.px-3.py-4.rounded-md.placeholder-black_white-100.bg-black_white-200.bg-opacity-0.text-black_white-100(placeholder= "Ingresa tu e-mail" type="email" name="email")
 
+                        div
+                            label.block.text-sm.uppercase.text-indigo-200.mb-2.font-bold(for="Password") Contraseña:
+                            .flex.items-center.border.py-2.px-3.rounded-md.border-black_white-100
+                                svg(class="h-5 w-5 text-black_white-100 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor")
+                                    path(fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd")
+                                input#nombre.w-full.px-3.py-4.rounded-md.placeholder-black_white-100.bg-black_white-200.bg-opacity-0.text-black_white-100(placeholder= "Ingresa tu contraseña" type="password" name="password")
 
-                    input(class="w-full bg-indigo-600 hover:bg-indigo-700 text-black_white-100 font-bold py-3 cursor-pointer rounded-lg" type="submit" value="Iniciar Sesión")
+                        div.flex.items-center.justify-between
+                            a.text-indigo-200.text-xs(class="hover:text-crimson-100 hover:underline hover:decoration-crimson-100" href="/auth/createAccount") ¿No tienes cuenta? 
+                                span.text-xs.text-black_white-100 Crear cuenta
+                            a.text-indigo-200.text-xs( class="hover:text-crimson-100 hover:underline hover:decoration-crimson-100" href="/auth/passswordRecovery") Olvide mi contraseña
+
+                        input(class="w-full bg-crimson-500 hover:bg-crimson-800 text-black_white-100 font-bold py-3 cursor-pointer rounded-lg" type="submit" value="Iniciar Sesión")
+
+                    div.mt-6
+                        div.relative
+                            div.absolute.inset-0.flex.items-center
+                            div.w-full.border-t.border-black_white-100
+                            div.relative.flex.justify-center.text-sm
+                                span.px-2.bg-gray-100.text-black_white-100.mt-5 O continua con
+
+                        div.mt-6.grid.grid-cols-3.gap-3
+                            div
+                                a(href="#", class="w-full flex items-center justify-center px-8 py-3 border border-black_white-100 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-black_white-100 hover:bg-black_white-200")
+                                    img.h-5.w-5(src="/img/Facebook.svg" alt="")
+                            div
+                                a(href="#", class="w-full flex items-center justify-center px-8 py-3 border border-black_white-100 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-black_white-100 hover:bg-black_white-200")
+                                    img.h-5.w-5(src="/img/Google.svg" alt="")
+                            div
+                                a(href="#", class="w-full flex items-center justify-center px-8 py-3 border border-black_white-100 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-black_white-100 hover:bg-black_white-200")
+                                    img.h-5.w-5(src="/img/Instagram.svg" alt="")
