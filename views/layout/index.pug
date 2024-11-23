@@ -1,11 +1,29 @@
 doctype html
 html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Bienes Raices | 230413 | #{page}
-        link(rel="stylesheet", href="/css/app.css")
-        
-    body(class="bg-gradient-to-r from-crimson-900 to-indigo-900 min-h-screen")
-        main(class="mx-auto container mt-10 px-2 blur-none")
-            block contenido
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Bienes Raices | 230413 | #{page}
+    link(rel="stylesheet", href="/css/app.css")
+    link(rel="stylesheet", href="/css/styles.css")
+    link(rel="shortcut icon", href="/assets/home.png", type="image/x-icon")
+    script(src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js")
+    script.
+      particlesJS.load('particles-js', '/json/particles.json', function() {
+        console.log('particles.js loaded - callback');
+      });
+    style.
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+  body(class="bg-gradientAnimated bg-300 animate-gradientShift flex items-center justify-center min-h-screen")
+    #particles-js
+    main(class="relative z-10 w-full max-w-4xl p-4 text-center")
+      block contenido
+
+
+                

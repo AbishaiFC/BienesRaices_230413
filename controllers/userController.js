@@ -81,7 +81,7 @@ const registerUser = async (req, res) => {
     await check('email').isEmail().withMessage('Esto no parece un email').run(req);
     await check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres').run(req);
     await check('confirmPassword').equals(req.body.password).withMessage('Las contraseñas no son iguales').run(req);
-
+    await check('birth').notEmpty().withMessage("La fecha no puede estar vacia").run(req);
     // Resultados de la validación
     const result = validationResult(req);
 
@@ -93,13 +93,14 @@ const registerUser = async (req, res) => {
             errors: result.array(),
             user: {
                 name: req.body.name,
-                email: req.body.email
+                email: req.body.email,
+                birth: req.body.birth
             }
         });
     }
 
     // Extraer los datos
-    const { name, email, password } = req.body;
+    const { name, email, password, birth } = req.body;
 
     try {
         // Verificar si el usuario ya existe
@@ -112,7 +113,8 @@ const registerUser = async (req, res) => {
                 errors: [{ msg: 'Usuario ya Registrado' }],
                 user: {
                     name: req.body.name,
-                    email: req.body.email
+                    email: req.body.email,
+                    birth: req.body.birth
                 }
             });
         }
@@ -122,6 +124,7 @@ const registerUser = async (req, res) => {
             name,
             email,
             password,
+            birth,
             token: generarId()
         });
 
@@ -151,7 +154,8 @@ const registerUser = async (req, res) => {
             errors: [{ msg: 'Error interno del servidor' }],
             user: {
                 name: req.body.name,
-                email: req.body.email
+                email: req.body.email,
+                birth: req.body.birth
             }
         });
     }

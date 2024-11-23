@@ -45,7 +45,7 @@ router.delete("/deleteUser/:email", function(req, res){
 
 // Rutas para los formularios de login, registro y recuperación de contraseña
 router.get('/login', loginForm);
-router.get('/login', authenticateUser);
+router.post('/login', authenticateUser);
 router.get("/createAccount", registerForm);
 router.post("/createAccount", registerUser);
 router.get("/passswordRecovery", passwordRecoveryForm);
