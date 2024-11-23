@@ -1,0 +1,43 @@
+@keyframes animParticle {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-2560px);
+    }
+  }
+  
+  .particle {
+    position: absolute;
+    background: transparent;
+    border-radius: 50%;
+  }
+  
+  .particle-1 {
+    animation: animParticle 60s linear infinite;
+    box-shadow: 10px 10px #fff, 20px 20px #fff;
+    width: 2px;
+    height: 2px;
+  }
+  
+  .particle-2 {
+    animation: animParticle 120s linear infinite;
+    box-shadow: 15px 15px #fff, 25px 25px #fff;
+    width: 3px;
+    height: 3px;
+  }
+  
+  .particle-3 {
+    animation: animParticle 180s linear infinite;
+    box-shadow: 20px 20px #fff, 30px 30px #fff;
+    width: 4px;
+    height: 4px;
+  }
+  
+  .particle-4 {
+    animation: animParticle 200s linear infinite;
+    box-shadow: 25px 25px #fff, 35px 35px #fff;
+    width: 1px;
+    height: 1px;
+  }
+  

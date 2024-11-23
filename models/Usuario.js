@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import db from '../config/db.js'
 
 const Usuario = db.define('usuarios', {
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -15,8 +15,12 @@ const Usuario = db.define('usuarios', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    birth:{
+        type: DataTypes.DATE,
+        allowNull: false
+    },
     token: DataTypes.STRING,
-    confirmado: DataTypes.BOOLEAN
+    confirmado: DataTypes.BOOLEAN,
 }, {
     hooks: {
         beforeCreate: async function name(usuario) {

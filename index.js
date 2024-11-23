@@ -8,6 +8,7 @@ import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import db from './config/db.js'
 
+
 // Instanciar nuestra aplicación Web
 const app = express();
 
@@ -18,13 +19,13 @@ app.use(express.urlencoded({extended: true}))
 // Habilita cookie-parser
 app.use(cookieParser())
 
-// Habililtar CSURF
+// Habililtar CSRF
 app.use(csrf({cookie: true}))
 
 // Conexion a la base de datos
 try{
     await db.authenticate();
-    db.sync()
+    db.sync({alter: true})
     console.log('Conexion a la Base de datos correcta')
 }catch(error){
     console.log(error);

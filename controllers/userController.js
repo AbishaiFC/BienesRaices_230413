@@ -2,138 +2,163 @@ import { check, validationResult } from 'express-validator';
 import Usuario from "../models/Usuario.js";
 import { generarId } from '../helpers/tokens.js';
 import { emailRegistro} from '../helpers/emails.js'
-import db from '../config/db.js';
-import csrf from 'csrf';
 
-const formularioLogin = (req, res) => {
+// Funciones de controlador
+const loginForm = (req, res) => {
     res.render('auth/login', {
-        page: "Ingresa a la plataforma"
+        page: "Iniciar Sesión"
     });
 };
 
-const formularioRegister = (req, res) => {
-console.log(req.csrfToken())
+const registerForm = (req, res) => {
+    console.log(req.csrfToken());
 
     res.render('auth/register', {
-        page: "Crea una nueva cuenta....",
+        page: "Crear una nueva cuenta",
         csrfToken : req.csrfToken()
     });
 };
 
-// Funcion que comprueba una cuenta
-const confirm =  async (req,res) => {
-    const{ token } = req.params
+const authenticateUser = async (req, res) => {
+    // Validación
+       await check('email').isEmail().withMessage('El Email es obligatorio').run(req);
+       await check('password').notEmpty().withMessage('La contraseña es obligatoria').run(req);
+   
+       const result = validationResult(req);
+   
+       // Si hay errores, retornarlos al formulario de registro
+       if (!result.isEmpty()) {
+           return res.render('auth/login', {
+               page: "Iniciar sesión....",
+               csrfToken : req.csrfToken(),
+               errors: result.array()
+           });
+       }
+       const {email, password} = req.body
+   
+   };
+
+// Funcion para confirmar cuenta
+const confirmAccount =  async (req, res) => {
+    const { token } = req.params;
     
-    console.log(token)
+    console.log(token);
 
-    // Verficar si el token es valido
-    const usuario = await Usuario.findOne({where: {token}})
+    // Verificar si el token es válido
+    const user = await Usuario.findOne({ where: { token } });
 
-    if(!usuario){
+    if (!user) {
         return res.render('auth/confirmAccount', {
-            page: 'Error al confirmar tu cuenta',
-            mensaje: 'Hubo un error al confirmar tu cuenta, intenta de nuevo',
+            page: 'Error Cuenta no Confirmada',
+            csrfToken : req.csrfToken(),
+            message: 'Hubo un error al intentar confirmar la cuenta, intentalo de nuevo',
             error: true
-        })
+        });
     }
 
-    // Confirma la Cuenta
-    usuario.token = null;
-    usuario.confirmado = true;
-    await usuario.save();
+    // Confirmar la cuenta
+    user.token = null;
+    user.confirmado = true;
+    await user.save();
     
     res.render('auth/confirmAccount', {
         page: 'Cuenta confirmada',
-        mensaje: 'La cuenta se confirmó correctamente'
-    })
-}
+        csrfToken : req.csrfToken(),
 
-
-const formularioPasswordRecovery = (req, res) => {
-    res.render('auth/passwordRecovery', {
-        page: "Recuperacion de contraseña"
+        message: 'La cuenta fue confirmada correctamente'
     });
 };
 
-const registrar = async (req, res) => {
-    // Validación
-    await check('nombre').notEmpty().withMessage('El nombre no puede estar vacio').run(req);
-    await check('email').isEmail().withMessage('Esto no parece un Email').run(req);
-    await check('password').isLength({ min: 6 }).withMessage('La contraseña debe de ser al menos 6 caracteres').run(req);
-    await check('Repetirpassword').custom((value, { req }) => {
-            if (value !== req.body.password) {
-                throw new Error('Las contraseñas no son iguales');
-            }
-            return true;
-        })
-        .run(req);
+const passwordRecoveryForm = (req, res) => {
+    res.render('auth/passwordRecovery', {
+        page: "Recuperación de la contraseña"
+    });
+};
 
+const registerUser = async (req, res) => {
+    // Validación
+    await check('name').notEmpty().withMessage('El nombre no puede estar vacio').run(req);
+    await check('email').isEmail().withMessage('Esto no parece un email').run(req);
+    await check('password').isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres').run(req);
+    await check('confirmPassword').equals(req.body.password).withMessage('Las contraseñas no son iguales').run(req);
+    await check('birth').notEmpty().withMessage("La fecha no puede estar vacia").run(req);
     // Resultados de la validación
-    const resultado = validationResult(req);
+    const result = validationResult(req);
 
     // Si hay errores, retornarlos al formulario de registro
-    if (!resultado.isEmpty()) {
+    if (!result.isEmpty()) {
         return res.render('auth/register', {
-            page: "Crea una nueva cuenta....",
+            page: "Crear una Cuenta Nueva",
             csrfToken : req.csrfToken(),
-            errores: resultado.array(),
-            usuario: {
-                nombre: req.body.nombre,
-                email: req.body.email
+            errors: result.array(),
+            user: {
+                name: req.body.name,
+                email: req.body.email,
+                birth: req.body.birth
             }
         });
     }
 
     // Extraer los datos
-    const { nombre, email, password } = req.body;
+    const { name, email, password, birth } = req.body;
 
     try {
-        // Verificar que el usuario no esté duplicado
-        const existeUsuario = await Usuario.findOne({ where: { email } });
+        // Verificar si el usuario ya existe
+        const existingUser = await Usuario.findOne({ where: { email } });
 
-        if (existeUsuario) {
+        if (existingUser) {
             return res.render('auth/register', {
-                page: "Crea una nueva cuenta....",
-                errores: [{ msg: 'Usuario ya registrado' }],
-                usuario: {
-                    nombre: req.body.nombre,
-                    email: req.body.email
+                page: "Crear una Cuenta Nueva",
+                csrfToken : req.csrfToken(),
+                errors: [{ msg: 'Usuario ya Registrado' }],
+                user: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    birth: req.body.birth
                 }
             });
         }
 
-        // Almacenar un nuevo usuario con un token generado
-        const usuario = await Usuario.create({
-            nombre,
+        // Almacenar el nuevo usuario con un token generado
+        const user = await Usuario.create({
+            name,
             email,
             password,
+            birth,
             token: generarId()
         });
 
-        // Envia email de confirmacion
+        // Enviar el correo de confirmación
         emailRegistro({
-          nombre: usuario.nombre,
-          email: usuario, email,
-          token: usuario.token
+            name: user.name,
+            email: user.email,
+            token: user.token
+        });
 
-        })
-
-        // Mostrar mensaje de confirmacion
-        res.render('templates/mensaje',{
-            page: 'Cuenta creada correctamennte',
-            mensaje: 'Hemos enviado un Email de Confirmacion, presiona en el enlace'
-        })
+        
+        res.render('templates/message', {
+            page: 'Cuenta creada satisfactoriamente',
+            csrfToken: req.csrfToken(),
+            message: `Se ha enviado una confirmación al correo: ${user.email}, por favor da click en el link`,
+            notification: {
+                title: '¡Registro exitoso!',
+                message: 'Se le ha enviado un mensaje a su correo, por favor revise su bandeja de entrada'
+            }
+        });
+        
     } catch (error) {
         console.error(error);
         res.render('auth/register', {
-            page: "Crea una nueva cuenta....",
-            errores: [{ msg: 'Error interno del servidor' }],
-            usuario: {
-                nombre: req.body.nombre,
-                email: req.body.email
+            page: "Crear una Cuenta Nueva",
+            csrfToken : req.csrfToken(),
+            errors: [{ msg: 'Error interno del servidor' }],
+            user: {
+                name: req.body.name,
+                email: req.body.email,
+                birth: req.body.birth
             }
         });
     }
 };
 
-export { formularioLogin, formularioRegister, confirm, registrar, formularioPasswordRecovery };
+export { loginForm, registerForm, confirmAccount, registerUser, authenticateUser,passwordRecoveryForm };
