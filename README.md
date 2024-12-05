@@ -14,7 +14,7 @@ Para poder demostrar y aprender la creación y consyumo de Interfaces de Profgra
 |10.|23/10/2024|Operaciones básicas de una API a traves de los verbos HTTP |12|✅ Finalizada|
 |11.|05/11/2024|Implementación de las Pantallas de Logeo, Registro y Recuperación de Contraseña|13|✅ Finalizada|
 |12.|20/11/2024|Implementación de la funcionalidad del registro de Cuentas de Usuario|	30 | ⭐Activa |
-
+|13.|28/11/2024|Implementación de recupueración de contraseñas|20| ⭐Activa |
 
 ## Autor
 
